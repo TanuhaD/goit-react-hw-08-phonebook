@@ -11,7 +11,6 @@ const FormLoginUser = () => {
     const email = evt.currentTarget.elements.email.value;
     const password = evt.currentTarget.elements.password.value;
     dispatch(logIn({ email, password }));
-    evt.currentTarget.reset();
   };
   return (
     <Container maxW="md" p="50" mt="30px" boxShadow="lg" rounded="md">

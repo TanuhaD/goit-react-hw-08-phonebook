@@ -1,18 +1,19 @@
 import { EmailIcon, LockIcon, StarIcon } from '@chakra-ui/icons';
 import { Button, Container, Input, InputGroup, InputLeftElement, Text } from '@chakra-ui/react';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux/auth/authOperations';
+import { selectAuthError } from '../../redux/auth/authSelectors';
 
 const FormRegisterUser = () => {
   const dispatch = useDispatch();
+  const authError = useSelector(selectAuthError);
   const handleFormSubmit = evt => {
     evt.preventDefault();
     const name = evt.currentTarget.elements.name.value;
     const email = evt.currentTarget.elements.email.value;
     const password = evt.currentTarget.elements.password.value;
     dispatch(register({ name, email, password }));
-    evt.currentTarget.reset();
   };
 
   return (
@@ -72,6 +73,7 @@ const FormRegisterUser = () => {
           Register
         </Button>
       </form>
+      {authError && <div>{authError}</div>}
     </Container>
   );
 };
